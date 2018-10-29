@@ -1,0 +1,66 @@
+
+data_NOTT-300-solv
+
+_chemical_name_mineral   ?
+_cell_length_a  14.829580(64)
+_cell_length_b  14.829580(64)
+_cell_length_c  11.773164(51)
+_cell_angle_alpha 90
+_cell_angle_beta  90
+_cell_angle_gamma 90
+_cell_volume 2589.112(25)
+_symmetry_space_group_name_H-M I4122
+
+_refine_special_details
+;
+The occupancies of OW1, OW2 and OW3 reflect the contributions to
+the diffraction pattern of the unlocated water H atoms. The final 
+formula of guest molecules was calculated from the TGA combined
+with elemental analysis data.
+;
+
+_chemical_formula_moiety       '[Al2 (OH)2 (C16 H6 O8)], 6(H2 O)'
+_chemical_formula_weight        522.29
+_diffrn_radiation_wavelength    0.826949
+_cell_measurement_temperature   293(2)
+_diffrn_ambient_temperature     293(2)
+
+loop_
+_symmetry_equiv_pos_as_xyz
+	'-x+1/2, -y+1/2, z+1/2'
+	'-x+1/2, y, -z-1/4'
+	'-y, -x, -z'
+	'-y, x+1/2, z+1/4'
+	'y+1/2, -x, z-1/4'
+	'y+1/2, x+1/2, -z+1/2'
+	'x, -y+1/2, -z+1/4'
+	'x, y, z'
+	'-x, -y, z'
+	'-x, y+1/2, -z+1/4'
+	'-y+1/2, -x+1/2, -z+1/2'
+	'-y+1/2, x, z-1/4'
+	'y, -x+1/2, z+1/4'
+	'y, x, -z'
+	'x+1/2, -y, -z-1/4'
+	'x+1/2, y+1/2, z+1/2'
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_symmetry_multiplicity
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_occupancy
+_atom_site_B_iso_or_equiv
+AL Al   8 0.694260(49) 0.305740(49) 0.5 1 0.72(13)
+O1 O   8 0.75744(13) 0.25 0.625 1 0.51(12)
+O2 O  16 0.897815(86) 0.286752(87) 0.99869(15) 1 0.51(12)
+O3 O  16 0.62165(10) 0.373714(97) 0.39436(12) 1 0.51(12)
+C1 C  16 0.59280(15) 0.36039(14) 0.69453(19) 1 0.70(13)
+C2 C  16 0.54498(10) 0.431806(68) 0.757216(95) 1 0.70(13)
+C3 C   8 0.5 0.5 0.69649(14) 1 0.70(13)
+C4 C  16 0.54071(10) 0.428618(71) 0.877164(80) 1 0.70(13)
+C5 C   8 0.5 0.5 0.93474(11) 1 0.70(13)
+H1 H  16 0.56928   0.38233   0.91693  1 0.70(13)
+H2 H   8 0.50000   0.50000   0.61757  1 0.70(13)
+H3 H   8 0.81813   0.25000   0.62500  1 0.70(13)
