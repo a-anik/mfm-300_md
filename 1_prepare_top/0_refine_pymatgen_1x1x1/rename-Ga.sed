@@ -1,0 +1,12 @@
+s/ Ga1 / Ga /;t
+s/ H2 / H2 /;t
+s/ H3 / H4 /;t
+s/ H4 / H  /;t
+s/ C5 / C2 /;t
+s/ C6 / C3 /;t
+s/ C7 / C5 /;t
+s/ C8 / C1 /;t
+s/ C9 / C4 /;t
+s/ O10 / O1 /;t
+s/ O11 / O2 /;t
+s/ O12 / O  /;t

@@ -1,0 +1,1 @@
+../../0_ref_data/s2_MFM-300_In_pure.cif

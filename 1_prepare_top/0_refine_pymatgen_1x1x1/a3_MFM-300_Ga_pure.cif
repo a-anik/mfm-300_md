@@ -1,0 +1,1 @@
+../../0_ref_data/s5_MFM-300_Ga_pure.cif
