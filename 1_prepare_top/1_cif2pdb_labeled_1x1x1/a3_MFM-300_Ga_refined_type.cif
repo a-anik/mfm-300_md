@@ -1,0 +1,1 @@
+../0_refine_pymatgen_1x1x1/c3_MFM-300_Ga_refined_type.cif
