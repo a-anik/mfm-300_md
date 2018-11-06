@@ -1,0 +1,19 @@
+.PHONY: all clean
+
+include mof.mk
+SCRIPTS = ../scripts
+OUT := $(MOF)_$(SUPERCELL)
+METAL = $(shell echo $(MOF) | sed -e 's/MFM-300_//')
+
+OUTFILE := c_$(OUT)_labeled_res.pdb
+
+all: $(OUTFILE)
+
+b_$(OUT)_reordered.pdb: a_$(OUT)_labeled.pdb
+	$(SCRIPTS)/reorder_by_res_MFM-300.py -v --metal=$(METAL) $< $@ | tee log_$(OUT).log
+
+c_$(OUT)_labeled_res.pdb: b_$(OUT)_reordered.pdb
+	cat $< | awk -f fix_pdb_elem.awk > $@
+
+clean:
+	-@rm -f b_$(OUT)_* c_$(OUT)_* log_$(OUT)*

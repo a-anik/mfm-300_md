@@ -1,0 +1,56 @@
+OUT_STRUCT = confout.pdb
+GROMPP_FILES = mdout.mdp topol.tpr
+MDRUN_FILES = traj.trr ener.edr md.log $(OUT_STRUCT) state.cpt state_prev.cpt traj.xtc traj.tng traj_comp.xtc
+
+.PHONY: clean all top
+
+CDATA = common_data
+SCRIPTS = ./scripts
+include mof.mk
+
+all: top
+
+$(MOF)_$(SUPERCELL).itp: conf.pdb $(CDATA)/rvdw.dat
+	$(SCRIPTS)/pdb2top_MOF.py -r $(CDATA)/rvdw.dat conf.pdb > $@
+
+template_atomtypes_$(MOF).itp: $(MOF)_$(SUPERCELL).itp $(SCRIPTS)/gen_atomtypes_template.py $(CDATA)/ff_atoms_map.dat
+	$(SCRIPTS)/gen_atomtypes_template.py --ffmap $(CDATA)/ff_atoms_map.dat $(MOF)_$(SUPERCELL).itp > $@
+
+valist_atomtypes_$(MOF).itp: $(MOF)_$(SUPERCELL).itp $(SCRIPTS)/gen_atomtypes_template.py $(CDATA)/ff_atoms_map.dat
+	$(SCRIPTS)/gen_atomtypes_template.py -v --ffmap $(CDATA)/ff_atoms_map.dat $(MOF)_$(SUPERCELL).itp > $@
+
+charges_$(MOF).sed: resp_conf.pdb RESP_CHARGES.resp $(SCRIPTS)/gen_charge_subst.py
+	$(SCRIPTS)/gen_charge_subst.py resp_conf.pdb RESP_CHARGES.resp > $@
+
+atomtypes_$(MOF).itp: template_atomtypes_$(MOF).itp header_atomtypes_$(MOF).itp \
+                      $(CDATA)/mass.sed $(CDATA)/gaff.sed charges_$(MOF).sed metal_ff_$(MOF).sed
+	cat header_atomtypes_$(MOF).itp template_atomtypes_$(MOF).itp | \
+	   sed -f $(CDATA)/mass.sed \
+	       -f $(CDATA)/gaff.sed \
+	       -f charges_$(MOF).sed \
+	       -f metal_ff_$(MOF).sed > $@
+
+topol.tpr: grompp.mdp topol.top atomtypes_$(MOF).itp $(MOF)_$(SUPERCELL).itp
+	gmx grompp -pp
+
+top: topol.tpr
+
+dump.out: topol.tpr
+	gmx dump -s topol.tpr > dump.out
+
+angdist.xvg:
+	gmx angle -type improper -f conf.gro -n angle.ndx -od -binwidth 1
+
+angle.ndx:
+	gmx mk_angndx -s -type improper
+
+
+clean:
+	-@rm -f $(GROMPP_FILES) $(MDRUN_FILES)
+	-@rm -f \#*\#
+	-@rm -f *.xvga dump.out energy.xvg processed.top 
+	-@rm -f resout.pdb traj_res.xtc
+	-@rm -f $(MOF)_$(SUPERCELL).itp
+	-@rm -f template_atomtypes_$(MOF).itp valist_atomtypes_$(MOF).itp atomtypes_$(MOF).itp
+	-@rm -f charges_$(MOF).sed
+

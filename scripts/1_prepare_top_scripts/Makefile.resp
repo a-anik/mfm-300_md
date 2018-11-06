@@ -1,0 +1,22 @@
+.PHONY: all clean
+
+OUT1_PREFIX:= 1_MFM-300_Al
+OUT2_PREFIX:= 2_MFM-300_In
+OUT3_PREFIX:= 3_MFM-300_Ga
+
+all: $(OUT1_PREFIX).out $(OUT2_PREFIX).out $(OUT3_PREFIX).out
+.PRECIOUS: $(OUT1_PREFIX).out $(OUT2_PREFIX).out $(OUT3_PREFIX).out
+
+$(OUT1_PREFIX).out: $(OUT1_PREFIX).inp
+	env OMP_NUM_THREADS=16 cp2k -i $< | tee $@ 
+
+$(OUT2_PREFIX).out: $(OUT2_PREFIX).inp
+	env OMP_NUM_THREADS=16 cp2k -i $< | tee $@ 
+
+$(OUT3_PREFIX).out: $(OUT3_PREFIX).inp
+	env OMP_NUM_THREADS=16 cp2k -i $< | tee $@ 
+
+clean:
+	-@rm -f $(OUT1_PREFIX).out $(OUT1_PREFIX)-* 
+	-@rm -f $(OUT2_PREFIX).out $(OUT2_PREFIX)-*
+	-@rm -f $(OUT3_PREFIX).out $(OUT3_PREFIX)-*

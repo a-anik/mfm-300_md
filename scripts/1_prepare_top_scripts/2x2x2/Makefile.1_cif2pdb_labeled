@@ -1,0 +1,13 @@
+.PHONY: all clean
+
+include mof.mk
+SCRIPTS = ../scripts
+OUTFILE := b_$(MOF)_$(SUPERCELL)_labeled.pdb
+
+all: $(OUTFILE)
+
+$(OUTFILE): a_$(MOF)_1x1x1_refined_type.cif
+	$(SCRIPTS)/cif2pdb_labeled.py -r 2 2 2 $< $@
+
+clean:
+	-@rm -f $(OUTFILE)
