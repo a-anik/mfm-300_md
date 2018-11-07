@@ -1,0 +1,1 @@
+../../scripts/pdb2cp2k_coords.py
