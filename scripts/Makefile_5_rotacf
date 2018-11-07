@@ -1,0 +1,80 @@
+.PHONY: clean all rotacf
+
+all: rotacf
+
+rotacf: rotacf_NO.xvg stats_NO_10ns.log stats_10ns.log
+
+conf.gro: topol.tpr
+	echo TMP | gmx trjconv -f -dump 0 -s -o conf.gro
+
+topol.tpr: grompp.mdp topol.top tempo.pdb
+	gmx grompp -c tempo.pdb
+
+index.ndx: conf.gro
+	echo "a 3 1 5\n keep 3\n name 0 TEMPO_C3-N1-C5\n a 1 11\n name 1 TEMPO_N1-O1\n q\n" |  gmx make_ndx -f conf.gro -o index.ndx
+
+rotacf.xvg: index.ndx
+	echo "TEMPO_C3-N1-C5" | gmx rotacf -P 2 -f -s -n -fitfn exp_exp -acflen 10000 -o rotacf.xvg | tee rotacf.log
+
+rotacf_P1.xvg: index.ndx
+	echo "TEMPO_C3-N1-C5" | gmx rotacf -P 1 -f -s -n -fitfn exp_exp -acflen 10000 -o rotacf_P1.xvg | tee rotacf_P1.log
+
+rotacf_NO_P2.xvg: index.ndx
+	echo "TEMPO_N1-O1" | gmx rotacf -P 2 -f -s -n -acflen 5000 -d -o rotacf_NO_P2.xvg | tee rotacf_NO_P2.log
+
+histCosXYZ.dat: conf.gro
+	../scripts/histCos_NO-XYZ.py -s conf.gro -f traj.xtc -o histCosXYZ.dat -oa -rand 0.005 -bins 50
+
+histPhi.dat: anglesXYZ.dat
+	../scripts/hist_phi.py anglesXYZ.dat | tee histPhi.dat
+
+hist2d_XY_TMP.O1.png: conf.gro
+	../scripts/hist2d_spatial_XY.py -s conf.gro -f traj.xtc -mof ../top/start_conf.gro -rand 0.005 -bins 50 -ref "resname TMP and name O1" -o hist2d_XY_O1.png
+
+histAngleX.dat: anglesXYZ.dat
+	../scripts/xvg_column_histogram.py -f anglesXYZ.dat -c 2 -bins 90 -xmin 0 -xmax 180 -o histAngleX.dat
+
+histAngleY.dat: anglesXYZ.dat
+	../scripts/xvg_column_histogram.py -f anglesXYZ.dat -c 3 -bins 90 -xmin 0 -xmax 180 -o histAngleY.dat
+
+histAngleZ.dat: anglesXYZ.dat
+	../scripts/xvg_column_histogram.py -f anglesXYZ.dat -c 4 -bins 90 -xmin 0 -xmax 180 -o histAngleZ.dat
+
+sumerr_10ns.xvg: index.ndx
+	../scripts/calc_rotacf.sh 100000 10000 | tee sumerr_10ns.xvg
+
+stats_10ns.log: sumerr_10ns.xvg
+	gmx analyze -f sumerr_10ns.xvg | tee stats_10ns.log
+
+rotacf_NO_P1.xvg: index.ndx
+	echo "TEMPO_N1-O1" | gmx rotacf -P 1 -f -s -n -fitfn exp_exp -acflen 500000 -d -o rotacf_NO_P1.xvg | tee rotacf_NO_P1.log
+
+sumerr_NO_P1_20ns.xvg: index.ndx
+	../scripts/calc_rotacf_NO.sh 100000 20000 | tee sumerr_NO_P1_20ns.xvg
+
+stats_NO_P1_20ns.log: sumerr_NO_P1_20ns.xvg
+	gmx analyze -f sumerr_NO_P1_20ns.xvg | tee stats_NO_P1_20ns.log
+
+angles_norm-Z.xvg: index.ndx
+	gmx gangle -f traj.xtc -g1 plane -g2 z -group1 0 -n -oall angles_norm-Z.xvg
+
+hist_norm-Z.dat: angles_norm-Z.xvg
+	../scripts/xvg_column_histogram.py -f angles_norm-Z.xvg -c 2 -bins 90 -xmin 0 -xmax 180 -o hist_norm-Z.xvg
+
+autocorr_norm-Z.xvg: angles_norm-Z.xvg
+	gmx analyze -f angles_norm-Z.xvg -w -acflen 1000 -fitfn exp_exp -ac autocorr_norm-Z.xvg
+
+angles_NO-X.xvg: index.ndx
+	gmx gangle -f traj.xtc -g1 vector -g2 vector -group1 1 -group2 '[0, 0, 0] plus [1, 0, 0]' -n -oall angles_NO-X.xvg
+angles_NO-Y.xvg: index.ndx
+	gmx gangle -f traj.xtc -g1 vector -g2 vector -group1 1 -group2 '[0, 0, 0] plus [0, 1, 0]' -n -oall angles_NO-Y.xvg
+angles_NO-Z.xvg: index.ndx
+	gmx gangle -f traj.xtc -g1 vector -g2 vector -group1 1 -group2 '[0, 0, 0] plus [0, 0, 1]' -n -oall angles_NO-Z.xvg
+
+
+clean:
+	-@rm -f conf.gro conf.pdb mdout.mdp topol.tpr
+	-@rm -f histAngle?.dat histPhi.dat hist?.dat
+	-@rm -f histCosXYZ.dat anglesXYZ.dat .*.npz
+	-@rm -f *.xvg *.log index.ndx
+	-@rm -f \#*\#

@@ -1,0 +1,57 @@
+.PHONY: clean all
+
+all: rdf_MOF-TMP.O1-TMP.xvg dist_H-TMP.O1.xvg \
+    hist_dist_MOF-TMP.O1.xvg hist_dist_MOF-TMP.C4.xvg hist_dist_MOF-TMPcom.xvg
+
+
+rdf_MOF-TMP.O1-TMP.xvg: traj.xtc topol.tpr
+	gmx rdf -f -s -ref "resname MOF" -sel "resname TMP and name O1; resname TMP" -o $@
+
+dist_MOF-TMP.O1-TMP.C4-TMPcom.xvg: traj.xtc topol.tpr
+	gmx pairdist -f -s -normpbc -cutoff 1.0 -ref "resname MOF" -sel "resname TMP and name O1; resname TMP and name C4; com of resname TMP" -o $@
+
+dist_TMP.O1-HO-HC-Hall.xvg: traj.xtc topol.tpr
+	gmx pairdist -f -s -normpbc -cutoff 1.0 -ref "resname TMP and name O1" \
+	    -sel "resname MOF and name H; resname MOF and name \"H[0-9]+\"; resname MOF and name \"H*\"; resname MOF and name C5"  -o $@
+
+dist_TMP.O1-MOF.C-O.xvg: traj.xtc topol.tpr
+	gmx pairdist -f -s -normpbc -cutoff 1.0 -ref "resname TMP and name O1" \
+	    -sel "resname MOF and name C1; resname MOF and name C2; resname MOF and name C3; resname MOF and name C4; \
+	          resname MOF and name C5; resname MOF and name \"O[1-2]\"" -o $@
+
+hist_dist_MOF-TMP.O1.xvg: dist_MOF-TMP.O1-TMP.C4-TMPcom.xvg
+	../scripts/xvg_column_histogram.py -c 2 -bins 200 -xmin 0.0025 -xmax 1.0025 -f $< -o $@
+
+hist_dist_TMP.O1-HO.xvg: dist_TMP.O1-HO-HC-Hall.xvg
+	../scripts/xvg_column_histogram.py -c 2 -bins 100 -xmin 0.0025 -xmax 1.0025 -f $< -o $@
+
+hist_dist_TMP.O1-HC.xvg: dist_TMP.O1-HO-HC-Hall.xvg
+	../scripts/xvg_column_histogram.py -c 3 -bins 100 -xmin 0.0025 -xmax 1.0025 -f $< -o $@
+
+hist_dist_TMP.O1-Hall.xvg: dist_TMP.O1-HO-HC-Hall.xvg
+	../scripts/xvg_column_histogram.py -c 4 -bins 100 -xmin 0.0025 -xmax 1.0025 -f $< -o $@
+
+hist_dist_TMP.O1-C2.xvg: dist_TMP.O1-MOF.C-O.xvg
+	../scripts/xvg_column_histogram.py -c 3 -bins 100 -xmin 0.0025 -xmax 1.0025 -f $< -o $@
+
+hist_dist_TMP.O1-C3.xvg: dist_TMP.O1-MOF.C-O.xvg
+	../scripts/xvg_column_histogram.py -c 4 -bins 100 -xmin 0.0025 -xmax 1.0025 -f $< -o $@
+
+hist_dist_TMP.O1-C4.xvg: dist_TMP.O1-MOF.C-O.xvg
+	../scripts/xvg_column_histogram.py -c 5 -bins 100 -xmin 0.0025 -xmax 1.0025 -f $< -o $@
+
+hist_dist_TMP.O1-C5.xvg: dist_TMP.O1-MOF.C-O.xvg
+	../scripts/xvg_column_histogram.py -c 6 -bins 100 -xmin 0.0025 -xmax 1.0025 -f $< -o $@
+
+hist_dist_TMP.O1-Ox.xvg: dist_TMP.O1-MOF.C-O.xvg
+	../scripts/xvg_column_histogram.py -c 7 -bins 100 -xmin 0.0025 -xmax 1.0025 -f $< -o $@
+
+hist_dist_MOF-TMP.C4.xvg: dist_MOF-TMP.O1-TMP.C4-TMPcom.xvg
+	../scripts/xvg_column_histogram.py -c 3 -f $< -o $@
+
+hist_dist_MOF-TMPcom.xvg: dist_MOF-TMP.O1-TMP.C4-TMPcom.xvg
+	../scripts/xvg_column_histogram.py -c 4 -f $< -o $@
+
+clean:
+	-@rm -f *.xvg
+	-@rm -f \#*\#

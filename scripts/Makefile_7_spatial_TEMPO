@@ -1,0 +1,20 @@
+.PHONY: clean all
+
+all: TMP.O1_grid.cube TMP.C4_grid.cube
+
+index_spatial.ndx: confout.gro
+	echo "r TMP & a O1\n r TMP & a C4\n q" | gmx make_ndx -f confout.gro -o index_spatial.ndx
+
+TMP.O1_grid.cube: traj.xtc topol.tpr index_spatial.ndx
+	echo "TMP_&_O1 MOF" | gmx spatial -s -f -n index_spatial.ndx -nodiv -ign 0 | tee TMP.O1_spatial.log
+	mv grid.cube TMP.O1_grid.cube
+
+TMP.C4_grid.cube: traj.xtc topol.tpr index_spatial.ndx
+	echo "TMP_&_O4 MOF" | gmx spatial -s -f -n index_spatial.ndx -nodiv -ign 0 | tee TMP.C4_spatial.log
+	mv grid.cube TMP.C4_grid.cube
+
+clean:
+	-@rm -f TMP.O1_grid.cube TMP.O1_spatial.log
+	-@rm -f TMP.C?_grid.cube TMP.C?_spatial.log
+	-@rm -f index_spatial.ndx
+	-@rm -f \#*\#

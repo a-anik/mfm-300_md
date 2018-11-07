@@ -1,0 +1,17 @@
+OUT_STRUCT = confout.gro
+GROMPP_FILES = mdout.mdp topol.tpr
+MDRUN_FILES = traj.trr ener.edr md.log $(OUT_STRUCT) state.cpt state_prev.cpt traj.xtc traj_comp.xtc
+
+.PHONY: clean all
+
+all: confout.gro
+
+confout.gro: start_conf.gro positions.dat TEMPO-vsLP_centered.pdb
+	gmx insert-molecules -f start_conf.gro -ci TEMPO-vsLP_centered.pdb -ip positions.dat -dr 0.1 -o confout.gro -seed 2 -nmol 1 -try 100000 -scale 0.95 -rot xyz 2>&1 | tee insert_tempo.log
+
+
+clean:
+	-@rm -f $(GROMPP_FILES) $(MDRUN_FILES)
+	-@rm -f insert*.log
+	-@rm -f \#*\#
+	-@rm -f energy.xvg res_trajout.xtc rmsd.xvg
