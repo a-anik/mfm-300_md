@@ -1,0 +1,27 @@
+;
+; MFM-300_In topology
+;
+; adapted to GROMACS by A.V.Anikeenko, 2018
+;
+;
+;
+;
+;
+
+[ defaults ]
+; nbfunc      comb-rule      gen-pairs       fudgeLJ    fudgeQQ
+1             2              yes             0.5        0.5
+
+
+#include "atomtypes_MFM-300_In.itp"
+#include "atomtypes_TEMPO-vsLP.itp"
+
+#include "MFM-300_In_2x2x2_periodic.itp"
+#include "tempo-vsLP.itp"
+
+[ system ]
+MFM-300_In 2x2x2 with 1 TEMPO
+
+[ molecules ]
+MOF      1
+TEMPO-vsLP   1

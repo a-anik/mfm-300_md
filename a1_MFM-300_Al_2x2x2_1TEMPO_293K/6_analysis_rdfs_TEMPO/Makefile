@@ -1,0 +1,1 @@
+../scripts/Makefile_6_rdfs_TEMPO
