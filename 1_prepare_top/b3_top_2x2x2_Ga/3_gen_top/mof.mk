@@ -1,0 +1,2 @@
+MOF=MFM-300_Ga
+SUPERCELL=2x2x2_periodic

@@ -1,0 +1,1 @@
+../../0_refine_pymatgen_1x1x1/c2_MFM-300_In_refined_type.cif

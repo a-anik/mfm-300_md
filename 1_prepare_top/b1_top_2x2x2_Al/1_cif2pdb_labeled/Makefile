@@ -1,0 +1,1 @@
+../scripts/2x2x2/Makefile.1_cif2pdb_labeled

@@ -1,0 +1,139 @@
+;
+; MFM-300_In atomtypes and bonded params:
+;   - GAFF for biphenyl-tetracarboxylic part
+;   - REPEAT charges
+;
+;
+; *REQUIRED DEFAULTS SECTION*
+;  nbfunc      comb-rule      gen-pairs       fudgeLJ    fudgeQQ
+;  1             2              yes             0.5        0.5
+;
+; adapted to GROMACS by A.V.Anikeenko, 2018
+;   A.M. Sheveleva et. al, 
+;
+;
+;
+
+[ atomtypes ]
+; name1 name2       mass         charge   ptype   sigma      epsilon
+C1_mof   C1      12.0107       0.138239     A     0.339967   0.359824 ; 'cp'    1   
+C2_mof   C2      12.0107      -0.231572     A     0.339967   0.359824 ; 'ca'    2   
+C3_mof   C3      12.0107       0.038351     A     0.339967   0.359824 ; 'ca'    3   
+C4_mof   C4      12.0107      -0.238045     A     0.339967   0.359824 ; 'ca'    4   
+C5_mof   C5      12.0107       0.723472     A     0.339967   0.359824 ; 'c '    5   
+H2_mof   H2       1.0079       0.141265     A     0.259964   0.062760 ; 'ha'    6   
+H4_mof   H4       1.0079       0.217188     A     0.259964   0.062760 ; 'ha'    7   
+H_mof    H        1.0079       0.496803     A     0.000000   0.000000 ; 'ho'    8   
+In_mof   In     114.8180       1.992261     A     0.397608   2.506216 ; from UFF  ; 'In'    9   
+O1_mof   O1      15.9994      -0.661092     A     0.295992   0.878640 ; 'o '   10   
+O2_mof   O2      15.9994      -0.700336     A     0.295992   0.878640 ; 'o '   11   
+O_mof    O       15.9994      -1.226622     A     0.306647   0.880314 ; 'oh'   12   
+
+; bond types                   func       b0          kb
+#define gb_mof_C1-C1             1      0.14850   294051.520 ; 'cp-cp'    1  avg=     0.150113  +-     0.000033 
+#define gb_mof_C1-C2             1      0.14060   376727.360 ; 'ca-cp'    2  avg=     0.140107  +-     0.000045 
+#define gb_mof_C2-C3             1      0.13980   385848.480 ; 'ca-ca'    3  avg=     0.139488  +-     0.000004 
+#define gb_mof_C2-H2             1      0.10860   289365.440 ; 'ca-ha'    4  avg=     0.092960  +-     0.000040 
+#define gb_mof_C3-C4             1      0.13980   385848.480 ; 'ca-ca'    5  avg=     0.139543  +-     0.000043 
+#define gb_mof_C3-C5             1      0.14910   289449.120 ; 'c -ca'    6  avg=     0.149464  +-     0.000043 
+#define gb_mof_C4-H4             1      0.10860   289365.440 ; 'ca-ha'    7  avg=     0.092969  +-     0.000046 
+#define gb_mof_C5-O1             1      0.12180   533627.360 ; 'c -o '    8  avg=     0.124514  +-     0.000049 
+#define gb_mof_C5-O2             1      0.12180   533627.360 ; 'c -o '    9  avg=     0.126419  +-     0.000044 
+#define gb_mof_H-O               1      0.09730   310787.520 ; 'ho-oh'   10  avg=     0.079450  +-     0.000050 
+#define gb_mof_In-O              1      0.21500   300000.000 ; 'In-O '   11  avg=     0.209974  +-     0.000017 
+#define gb_mof_In-O1             1      0.21500   300000.000 ; 'In-O1'   12  avg=     0.217580  +-     0.000000 
+#define gb_mof_In-O2             1      0.21500   300000.000 ; 'In-O2'   13  avg=     0.213219  +-     0.000036 
+
+; angle types                  func       phi0        fc
+#define ga_mof_C1-C1-C2          1       121.11      535.552 ; 'ca-cp-cp'    1  avg=   120.420944  +-     0.019345 
+#define ga_mof_C1-C2-C3          1       120.69      554.798 ; 'ca-ca-cp'    2  avg=   120.293544  +-     0.023981 
+#define ga_mof_C1-C2-H2          1       119.86      401.664 ; 'cp-ca-ha'    3  avg=   119.883757  +-     0.020597 
+#define ga_mof_C2-C1-C2          1       118.38      558.146 ; 'ca-cp-ca'    4  avg=   119.158105  +-     0.036112 
+#define ga_mof_C2-C3-C4          1       120.02      557.309 ; 'ca-ca-ca'    5  avg=   120.161977  +-     0.019993 
+#define ga_mof_C2-C3-C5          1       120.33      538.062 ; 'c -ca-ca'    6  avg=   119.788748  +-     0.021739 
+#define ga_mof_C3-C2-H2          1       119.88      403.338 ; 'ca-ca-ha'    7  avg=   119.822609  +-     0.021442 
+#define ga_mof_C3-C4-C3          1       120.02      557.309 ; 'ca-ca-ca'    8  avg=   119.688114  +-     0.007745 
+#define ga_mof_C3-C4-H4          1       119.88      403.338 ; 'ca-ca-ha'    9  avg=   120.155933  +-     0.010077 
+#define ga_mof_C3-C5-O1          1       122.60      574.882 ; 'ca-c -o '   10  avg=   117.106355  +-     0.031521 
+#define ga_mof_C3-C5-O2          1       122.60      574.882 ; 'ca-c -o '   11  avg=   115.718759  +-     0.027933 
+#define ga_mof_C4-C3-C5          1       120.33      538.062 ; 'c -ca-ca'   12  avg=   120.035476  +-     0.017864 
+#define ga_mof_C5-O1-In          1       135.38      550.000 ; 'C5-O1-In'   13  avg=   135.388066  +-     0.022187 
+#define ga_mof_C5-O2-In          1       131.61      550.000 ; 'C5-O2-In'   14  avg=   131.626216  +-     0.028481 
+#define ga_mof_H-O-In            1       119.66      550.000 ; 'H -O -In'   15  avg=   119.658498  +-     0.002382 
+#define ga_mof_In-O-In           1       120.68      550.000 ; 'In-O -In'   16  avg=   120.683031  +-     0.003129 
+#define ga_mof_O-In-O            1        94.65      550.000 ; 'O -In-O '   17  avg=    94.646345  +-     0.006307 
+#define ga_mof_O-In-O1           1        90.00      550.000 ; 'O -In-O1'   18  avg=    87.699725  +-     2.645244 
+#define ga_mof_O-In-O2           1         0.0         0.0   ; 'O -In-O2'   19  avg=   132.299561  +-    41.285100 
+#define ga_mof_O1-C5-O2          1       130.25      651.867 ; 'o -c -o '   20  avg=   127.174249  +-     0.037350 
+#define ga_mof_O1-In-O1          1       180.00      550.000 ; 'O1-In-O1'   21  avg=   173.218225  +-     0.000066 
+#define ga_mof_O1-In-O2          1        90.00      550.000 ; 'O1-In-O2'   22  avg=    92.529272  +-     0.623395 
+#define ga_mof_O2-In-O2          1        83.49      550.000 ; 'O2-In-O2'   23  avg=    83.500691  +-     0.015670 
+
+; dihedral types               func       phi0        fc    mult
+#define gd_mof_C1-C1-C2-C3       9       180.00       15.167     2 ; 'ca-ca-cp-cp'    1  avg=  -177.685606  +-     0.016548 
+#define gd_mof_C1-C1-C2-H2       9       180.00       15.167     2 ; 'cp-cp-ca-ha'    2  avg=     2.212734  +-     0.031419 
+#define gd_mof_C1-C2-C3-C4       9       180.00       15.167     2 ; 'ca-ca-ca-cp'    3  avg=    -4.642849  +-     0.033246 
+#define gd_mof_C1-C2-C3-C5       9       180.00       15.167     2 ; 'c -ca-ca-cp'    4  avg=   174.007722  +-     0.037157 
+#define gd_mof_C2-C1-C1-C2       9       240.00        4.184     2 ; changed ; 'ca-cp-cp-ca'    5  avg=   -55.293441  +-    90.000004 
+#define gd_mof_C2-C1-C2-C3       9       180.00       15.167     2 ; 'ca-ca-cp-ca'    6  avg=     2.314388  +-     0.046851 
+#define gd_mof_C2-C1-C2-H2       9       180.00       15.167     2 ; 'ca-cp-ca-ha'    7  avg=  -177.787266  +-     0.031021 
+#define gd_mof_C2-C3-C4-C3       9       180.00       15.167     2 ; 'ca-ca-ca-ca'    8  avg=     2.314394  +-     0.053630 
+#define gd_mof_C2-C3-C4-H4       9       180.00       15.167     2 ; 'ca-ca-ca-ha'    9  avg=  -177.685603  +-     0.016678 
+#define gd_mof_C2-C3-C5-O1       9       180.00        4.184     2 ; 'ca-ca-c -o '   10  avg=    24.191422  +-     0.038336 
+#define gd_mof_C2-C3-C5-O2       9       180.00        4.184     2 ; 'ca-ca-c -o '   11  avg=  -156.071301  +-     0.030701 
+#define gd_mof_C3-C4-C3-C5       9       180.00       15.167     2 ; 'c -ca-ca-ca'   12  avg=  -176.332827  +-     0.020329 
+#define gd_mof_C3-C5-O1-In       9         0.0         0.0       0 ; 'C3-C5-O1-In'   13  avg=  -151.931722  +-     0.027788 
+#define gd_mof_C3-C5-O2-In       9         0.0         0.0       0 ; 'C3-C5-O2-In'   14  avg=   175.050093  +-     0.027282 
+#define gd_mof_C4-C3-C2-H2       9       180.00       15.167     2 ; 'ca-ca-ca-ha'   15  avg=   175.458741  +-     0.030027 
+#define gd_mof_C4-C3-C5-O1       9       180.00        4.184     2 ; 'ca-ca-c -o '   16  avg=  -157.156285  +-     0.029144 
+#define gd_mof_C4-C3-C5-O2       9       180.00        4.184     2 ; 'ca-ca-c -o '   17  avg=    22.580990  +-     0.045976 
+#define gd_mof_C5-C3-C2-H2       9       180.00       15.167     2 ; 'c -ca-ca-ha'   18  avg=    -5.890688  +-     0.032250 
+#define gd_mof_C5-C3-C4-H4       9       180.00       15.167     2 ; 'c -ca-ca-ha'   19  avg=     3.667184  +-     0.039024 
+#define gd_mof_C5-O1-In-O        9         0.0         0.0       0 ; 'C5-O1-In-O '   20  avg=    44.235636  +-    47.316955 
+#define gd_mof_C5-O1-In-O1       9         0.0         0.0       0 ; 'C5-O1-In-O1'   21  avg=    44.120336  +-     0.166965 
+#define gd_mof_C5-O1-In-O2       9         0.0         0.0       0 ; 'C5-O1-In-O2'   22  avg=  -135.904275  +-    41.796454 
+#define gd_mof_C5-O2-In-O        9         0.0         0.0       0 ; 'C5-O2-In-O '   23  avg=    44.784474  +-    75.977596 
+#define gd_mof_C5-O2-In-O1       9         0.0         0.0       0 ; 'C5-O2-In-O1'   24  avg=   -28.554747  +-    87.740634 
+#define gd_mof_C5-O2-In-O2       9         0.0         0.0       0 ; 'C5-O2-In-O2'   25  avg=   152.142996  +-     0.033032 
+#define gd_mof_H-O-In-O          9       288.84       20.000     2 ; 'H -O -In-O '   26  avg=    54.424398  +-     0.008578 
+#define gd_mof_H-O-In-O1         9         0.0         0.0       0 ; 'H -O -In-O1'   27  avg=    51.985292  +-    87.505323 
+#define gd_mof_H-O-In-O2         9         0.0         0.0       0 ; 'H -O -In-O2'   28  avg=  -113.015853  +-    15.581264 
+#define gd_mof_In-O-In-O         9         0.0         0.0       0 ; 'In-O -In-O '   29  avg=  -125.575596  +-     0.012441 
+#define gd_mof_In-O-In-O1        9         0.0         0.0       0 ; 'In-O -In-O1'   30  avg=    51.985282  +-    92.494680 
+#define gd_mof_In-O-In-O2        9         0.0         0.0       0 ; 'In-O -In-O2'   31  avg=    66.984145  +-    15.581275 
+#define gd_mof_In-O1-C5-O2       9         0.0         0.0       0 ; 'In-O1-C5-O2'   32  avg=    28.365327  +-     0.051450 
+#define gd_mof_In-O2-C5-O1       9         0.0         0.0       0 ; 'In-O2-C5-O1'   33  avg=    -5.243402  +-     0.053511 
+
+; improper dihedral types      func       phi0        fc
+#define gi_mof_C1-C1-C2-C2       4         0.0         0.0       0 ; 'C1-C1-C2-C2'    1  avg=     0.000006  +-     0.024171 
+#define gi_mof_C1-C2-C2-C1       4       180.00        4.602     2 ; 'C1-C2-C2-C1'    2  avg=    -0.006733  +-     0.023593 
+#define gi_mof_C2-C1-C3-H2       4       180.00        4.602     2 ; 'C2-C1-C3-H2'    3  avg=     0.050400  +-     0.019951 
+#define gi_mof_C2-C1-H2-C3       4         0.0         0.0       0 ; 'C2-C1-H2-C3'    4  avg=    -0.063083  +-     0.024984 
+#define gi_mof_C2-C3-H2-C1       4         0.0         0.0       0 ; 'C2-C3-H2-C1'    5  avg=     0.063137  +-     0.025007 
+#define gi_mof_C3-C2-C4-C5       4       180.00        4.602     2 ; 'C3-C2-C4-C5'    6  avg=     0.799086  +-     0.027942 
+#define gi_mof_C3-C2-C5-C4       4         0.0         0.0       0 ; 'C3-C2-C5-C4'    7  avg=    -0.768370  +-     0.026784 
+#define gi_mof_C3-C4-C5-C2       4         0.0         0.0       0 ; 'C3-C4-C5-C2'    8  avg=     0.771073  +-     0.026920 
+#define gi_mof_C4-C3-C3-H4       4       180.00        4.602     2 ; 'C4-C3-C3-H4'    9  avg=     0.005416  +-     0.021926 
+#define gi_mof_C4-C3-H4-C3       4         0.0         0.0       0 ; 'C4-C3-H4-C3'   10  avg=     0.000002  +-     0.028633 
+#define gi_mof_C5-C3-O1-O2       4         0.0         0.0       0 ; 'C5-C3-O1-O2'   11  avg=     0.151845  +-     0.026977 
+#define gi_mof_C5-C3-O2-O1       4         0.0         0.0       0 ; 'C5-C3-O2-O1'   12  avg=    -0.147658  +-     0.026209 
+#define gi_mof_C5-O1-O2-C3       4       180.00        4.602     2 ; 'C5-O1-O2-C3'   13  avg=     0.192537  +-     0.034145 
+#define gi_mof_In-O-O-O1         4         0.0         0.0       0 ; 'In-O -O -O1'   14  avg=     0.000697  +-    59.153057 
+#define gi_mof_In-O-O-O2         4       180.00       15.000     2 ; 'In-O -O -O2'   15  avg=    -0.000855  +-     2.135036 
+#define gi_mof_In-O-O1-O         4         0.0         0.0       0 ; 'In-O -O1-O '   16  avg=    -1.657861  +-    52.556692 
+#define gi_mof_In-O-O1-O1        4       180.00       15.000     2 ; 'In-O -O1-O1'   17  avg=    -0.081427  +-     3.668795 
+#define gi_mof_In-O-O1-O2        4         0.0         0.0       0 ; 'In-O -O1-O2'   18  avg=     0.354783  +-    37.268441 
+#define gi_mof_In-O-O2-O         4         0.0         0.0       0 ; 'In-O -O2-O '   19  avg=    12.278987  +-    14.328584 
+#define gi_mof_In-O-O2-O1        4         0.0         0.0       0 ; 'In-O -O2-O1'   20  avg=    15.731316  +-    73.283972 
+#define gi_mof_In-O-O2-O2        4         0.0         0.0       0 ; 'In-O -O2-O2'   21  avg=   -72.271187  +-    74.761441 
+#define gi_mof_In-O1-O1-O        4         0.0         0.0       0 ; 'In-O1-O1-O '   22  avg=    -0.001109  +-   130.041026 
+#define gi_mof_In-O1-O1-O2       4         0.0         0.0       0 ; 'In-O1-O1-O2'   23  avg=     0.000453  +-    39.544399 
+#define gi_mof_In-O1-O2-O        4         0.0         0.0       0 ; 'In-O1-O2-O '   24  avg=    -0.000438  +-    39.175978 
+#define gi_mof_In-O1-O2-O1       4       180.00       15.000     2 ; 'In-O1-O2-O1'   25  avg=    -0.000025  +-     3.154861 
+#define gi_mof_In-O1-O2-O2       4         0.0         0.0       0 ; 'In-O1-O2-O2'   26  avg=    -0.000609  +-    56.901364 
+#define gi_mof_In-O2-O2-O        4       180.00       15.000     2 ; 'In-O2-O2-O '   27  avg=    -0.000054  +-     2.321138 
+#define gi_mof_In-O2-O2-O1       4         0.0         0.0       0 ; 'In-O2-O2-O1'   28  avg=    -0.000134  +-    51.630149 
+#define gi_mof_O-H-In-In         4       180.00       15.000     2 ; 'O -H -In-In'   29  avg=     0.000000  +-     0.009350 
+#define gi_mof_O-In-In-H         4       180.00       15.000     2 ; 'O -In-In-H '   30  avg=     0.001262  +-     0.004890 
+
+; END of atomtypes.itp
