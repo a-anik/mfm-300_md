@@ -1,0 +1,139 @@
+;
+; MFM-300_Al atomtypes and bonded params:
+;   - GAFF for biphenyl-tetracarboxylic part
+;   - REPEAT charges
+;
+;
+; *REQUIRED DEFAULTS SECTION*
+;  nbfunc      comb-rule      gen-pairs       fudgeLJ    fudgeQQ
+;  1             2              yes             0.5        0.5
+;
+; adapted to GROMACS by A.V.Anikeenko, 2018
+;   A.M. Sheveleva et. al, 
+;
+;
+;
+
+[ atomtypes ]
+; name1 name2       mass         charge   ptype   sigma      epsilon
+Al_mof   Al      26.9815       2.451193     A     0.400815   2.11292  ; from UFF  ; 'Al'    1   
+C1_mof   C1      12.0107       0.120012     A     0.339967   0.359824 ; 'cp'    2   
+C2_mof   C2      12.0107      -0.216795     A     0.339967   0.359824 ; 'ca'    3   
+C3_mof   C3      12.0107       0.034044     A     0.339967   0.359824 ; 'ca'    4   
+C4_mof   C4      12.0107      -0.221900     A     0.339967   0.359824 ; 'ca'    5   
+C5_mof   C5      12.0107       0.729493     A     0.339967   0.359824 ; 'c '    6   
+H2_mof   H2       1.0079       0.140520     A     0.259964   0.062760 ; 'ha'    7   
+H4_mof   H4       1.0079       0.199922     A     0.259964   0.062760 ; 'ha'    8   
+H_mof    H        1.0079       0.482461     A     0.000000   0.000000 ; 'ho'    9   
+O1_mof   O1      15.9994      -0.740408     A     0.295992   0.878640 ; 'o '   10   
+O2_mof   O2      15.9994      -0.758673     A     0.295992   0.878640 ; 'o '   11   
+O_mof    O       15.9994      -1.408051     A     0.306647   0.880314 ; 'oh'   12   
+
+; bond types                   func       b0          kb
+#define gb_mof_Al-O              1      0.19300   300000.000 ; 'Al-O '    1  avg=     0.193050  +-     0.000044 
+#define gb_mof_Al-O1             1      0.19300   300000.000 ; 'Al-O1'    2  avg=     0.193540  +-     0.000049 
+#define gb_mof_Al-O2             1      0.19300   300000.000 ; 'Al-O2'    3  avg=     0.192945  +-     0.000026 
+#define gb_mof_C1-C1             1      0.14850   294051.520 ; 'cp-cp'    4  avg=     0.153650  +-     0.000050 
+#define gb_mof_C1-C2             1      0.14060   376727.360 ; 'ca-cp'    5  avg=     0.139474  +-     0.000042 
+#define gb_mof_C2-C3             1      0.13980   385848.480 ; 'ca-ca'    6  avg=     0.141432  +-     0.000033 
+#define gb_mof_C2-H2             1      0.10860   289365.440 ; 'ca-ha'    7  avg=     0.093245  +-     0.000045 
+#define gb_mof_C3-C4             1      0.13980   385848.480 ; 'ca-ca'    8  avg=     0.140668  +-     0.000030 
+#define gb_mof_C3-C5             1      0.14910   289449.120 ; 'c -ca'    9  avg=     0.147300  +-     0.000043 
+#define gb_mof_C4-H4             1      0.10860   289365.440 ; 'ca-ha'   10  avg=     0.092913  +-     0.000033 
+#define gb_mof_C5-O1             1      0.12180   533627.360 ; 'c -o '   11  avg=     0.128785  +-     0.000030 
+#define gb_mof_C5-O2             1      0.12180   533627.360 ; 'c -o '   12  avg=     0.118866  +-     0.000044 
+#define gb_mof_H-O               1      0.09730   310787.520 ; 'ho-oh'   13  avg=     0.090000  +-     0.000000 
+
+; angle types                  func       phi0        fc
+#define ga_mof_Al-O-Al           1       121.93      550.000 ; 'Al-O -Al'    1  avg=   121.926350  +-     0.005456 
+#define ga_mof_Al-O-H            1       119.04      550.000 ; 'Al-O -H '    2  avg=   119.036812  +-     0.007025 
+#define ga_mof_Al-O1-C5          1       132.30      550.000 ; 'Al-O1-C5'    3  avg=   132.301081  +-     0.029016 
+#define ga_mof_Al-O2-C5          1       131.35      550.000 ; 'Al-O2-C5'    4  avg=   131.351769  +-     0.024496 
+#define ga_mof_C1-C1-C2          1       121.11      535.552 ; 'ca-cp-cp'    5  avg=   119.079644  +-     0.012589 
+#define ga_mof_C1-C2-C3          1       120.69      554.798 ; 'ca-ca-cp'    6  avg=   118.624263  +-     0.025440 
+#define ga_mof_C1-C2-H2          1       119.86      401.664 ; 'cp-ca-ha'    7  avg=   120.754900  +-     0.023874 
+#define ga_mof_C2-C1-C2          1       118.38      558.146 ; 'ca-cp-ca'    8  avg=   121.840712  +-     0.021997 
+#define ga_mof_C2-C3-C4          1       120.02      557.309 ; 'ca-ca-ca'    9  avg=   120.698544  +-     0.021203 
+#define ga_mof_C2-C3-C5          1       120.33      538.062 ; 'c -ca-ca'   10  avg=   119.837350  +-     0.024761 
+#define ga_mof_C3-C2-H2          1       119.88      403.338 ; 'ca-ca-ha'   11  avg=   120.381219  +-     0.030351 
+#define ga_mof_C3-C4-C3          1       120.02      557.309 ; 'ca-ca-ca'   12  avg=   118.899950  +-     0.008650 
+#define ga_mof_C3-C4-H4          1       119.88      403.338 ; 'ca-ca-ha'   13  avg=   120.549975  +-     0.007491 
+#define ga_mof_C3-C5-O1          1       122.60      574.882 ; 'ca-c -o '   14  avg=   113.690406  +-     0.014161 
+#define ga_mof_C3-C5-O2          1       122.60      574.882 ; 'ca-c -o '   15  avg=   118.756831  +-     0.031164 
+#define ga_mof_C4-C3-C5          1       120.33      538.062 ; 'c -ca-ca'   16  avg=   119.381113  +-     0.009498 
+#define ga_mof_O-Al-O            1        99.53      550.000 ; 'O -Al-O '   17  avg=    99.526900  +-     0.014454 
+#define ga_mof_O-Al-O1           1        90.00      550.000 ; 'O -Al-O1'   18  avg=    89.918772  +-     2.666946 
+#define ga_mof_O-Al-O2           1         0.0         0.0   ; 'O -Al-O2'   19  avg=   130.229788  +-    40.163605 
+#define ga_mof_O1-Al-O1          1       180.00      550.000 ; 'O1-Al-O1'   20  avg=   179.747463  +-     0.029426 
+#define ga_mof_O1-Al-O2          1        90.00      550.000 ; 'O1-Al-O2'   21  avg=    90.096013  +-     1.742511 
+#define ga_mof_O1-C5-O2          1       130.25      651.867 ; 'o -c -o '   22  avg=   127.000706  +-     0.030037 
+#define ga_mof_O2-Al-O2          1        80.35      550.000 ; 'O2-Al-O2'   23  avg=    80.346125  +-     0.011325 
+
+; dihedral types               func       phi0        fc    mult
+#define gd_mof_Al-O-Al-O         9         0.0         0.0       0 ; 'Al-O -Al-O '    1  avg=  -126.135556  +-     0.026742 
+#define gd_mof_Al-O-Al-O1        9         0.0         0.0       0 ; 'Al-O -Al-O1'    2  avg=    51.605638  +-    90.095924 
+#define gd_mof_Al-O-Al-O2        9         0.0         0.0       0 ; 'Al-O -Al-O2'    3  avg=    55.141663  +-     1.789686 
+#define gd_mof_Al-O1-C5-C3       9         0.0         0.0       0 ; 'Al-O1-C5-C3'    4  avg=  -149.382831  +-     0.032279 
+#define gd_mof_Al-O1-C5-O2       9         0.0         0.0       0 ; 'Al-O1-C5-O2'    5  avg=    21.912294  +-     0.064889 
+#define gd_mof_Al-O2-C5-C3       9         0.0         0.0       0 ; 'Al-O2-C5-C3'    6  avg=   179.444769  +-     0.012112 
+#define gd_mof_Al-O2-C5-O1       9         0.0         0.0       0 ; 'Al-O2-C5-O1'    7  avg=     8.540719  +-     0.059454 
+#define gd_mof_C1-C1-C2-C3       9       180.00       15.167     2 ; 'ca-ca-cp-cp'    8  avg=  -176.385863  +-     0.010656 
+#define gd_mof_C1-C1-C2-H2       9       180.00       15.167     2 ; 'cp-cp-ca-ha'    9  avg=    -1.988156  +-     0.040382 
+#define gd_mof_C1-C2-C3-C4       9       180.00       15.167     2 ; 'ca-ca-ca-cp'   10  avg=    -7.340063  +-     0.024498 
+#define gd_mof_C1-C2-C3-C5       9       180.00       15.167     2 ; 'c -ca-ca-cp'   11  avg=   175.992825  +-     0.019436 
+#define gd_mof_C2-C1-C1-C2       9       240.00        4.184     2 ; changed ; 'ca-cp-cp-ca'   12  avg=   -59.408150  +-    90.000001 
+#define gd_mof_C2-C1-C2-C3       9       180.00       15.167     2 ; 'ca-ca-cp-ca'   13  avg=     3.614150  +-     0.025489 
+#define gd_mof_C2-C1-C2-H2       9       180.00       15.167     2 ; 'ca-cp-ca-ha'   14  avg=   178.011838  +-     0.034570 
+#define gd_mof_C2-C3-C4-C3       9       180.00       15.167     2 ; 'ca-ca-ca-ca'   15  avg=     3.712487  +-     0.029579 
+#define gd_mof_C2-C3-C4-H4       9       180.00       15.167     2 ; 'ca-ca-ca-ha'   16  avg=  -176.287506  +-     0.013795 
+#define gd_mof_C2-C3-C5-O1       9       180.00        4.184     2 ; 'ca-ca-c -o '   17  avg=    20.967644  +-     0.025000 
+#define gd_mof_C2-C3-C5-O2       9       180.00        4.184     2 ; 'ca-ca-c -o '   18  avg=  -151.107594  +-     0.035124 
+#define gd_mof_C3-C4-C3-C5       9       180.00       15.167     2 ; 'c -ca-ca-ca'   19  avg=  -179.605350  +-     0.024034 
+#define gd_mof_C4-C3-C2-H2       9       180.00       15.167     2 ; 'ca-ca-ca-ha'   20  avg=   178.240644  +-     0.037755 
+#define gd_mof_C4-C3-C5-O1       9       180.00        4.184     2 ; 'ca-ca-c -o '   21  avg=  -155.743525  +-     0.025300 
+#define gd_mof_C4-C3-C5-O2       9       180.00        4.184     2 ; 'ca-ca-c -o '   22  avg=    32.181206  +-     0.040863 
+#define gd_mof_C5-C3-C2-H2       9       180.00       15.167     2 ; 'c -ca-ca-ha'   23  avg=     1.573538  +-     0.033675 
+#define gd_mof_C5-C3-C4-H4       9       180.00       15.167     2 ; 'c -ca-ca-ha'   24  avg=     0.394650  +-     0.018548 
+#define gd_mof_C5-O1-Al-O        9         0.0         0.0       0 ; 'C5-O1-Al-O '   25  avg=    45.152147  +-    49.710965 
+#define gd_mof_C5-O1-Al-O1       9         0.0         0.0       0 ; 'C5-O1-Al-O1'   26  avg=    45.147700  +-     6.013456 
+#define gd_mof_C5-O1-Al-O2       9         0.0         0.0       0 ; 'C5-O1-Al-O2'   27  avg=  -134.849853  +-    40.141723 
+#define gd_mof_C5-O2-Al-O        9         0.0         0.0       0 ; 'C5-O2-Al-O '   28  avg=    47.315134  +-    88.488263 
+#define gd_mof_C5-O2-Al-O1       9         0.0         0.0       0 ; 'C5-O2-Al-O1'   29  avg=   -38.502978  +-    89.918999 
+#define gd_mof_C5-O2-Al-O2       9         0.0         0.0       0 ; 'C5-O2-Al-O2'   30  avg=   139.432056  +-     0.033937 
+#define gd_mof_H-O-Al-O          9       287.72       20.000     2 ; 'H -O -Al-O '   31  avg=    53.864456  +-     0.014290 
+#define gd_mof_H-O-Al-O1         9         0.0         0.0       0 ; 'H -O -Al-O1'   32  avg=    51.605638  +-    89.904089 
+#define gd_mof_H-O-Al-O2         9         0.0         0.0       0 ; 'H -O -Al-O2'   33  avg=  -124.858331  +-     1.789040 
+
+; improper dihedral types      func       phi0        fc
+#define gi_mof_Al-O-O-O1         4         0.0         0.0       0 ; 'Al-O -O -O1'    1  avg=     0.010569  +-    57.246733 
+#define gi_mof_Al-O-O-O2         4       180.00       15.000     2 ; 'Al-O -O -O2'    2  avg=     0.004081  +-     0.362653 
+#define gi_mof_Al-O-O1-O         4         0.0         0.0       0 ; 'Al-O -O1-O '    3  avg=    -1.594897  +-    50.144337 
+#define gi_mof_Al-O-O1-O1        4       180.00       15.000     2 ; 'Al-O -O1-O1'    4  avg=    -0.003153  +-     0.137322 
+#define gi_mof_Al-O-O1-O2        4         0.0         0.0       0 ; 'Al-O -O1-O2'    5  avg=    -0.045678  +-    38.878304 
+#define gi_mof_Al-O-O2-O         4         0.0         0.0       0 ; 'Al-O -O2-O '    6  avg=     1.233669  +-     1.565712 
+#define gi_mof_Al-O-O2-O1        4         0.0         0.0       0 ; 'Al-O -O2-O1'    7  avg=     3.786948  +-    71.638086 
+#define gi_mof_Al-O-O2-O2        4         0.0         0.0       0 ; 'Al-O -O2-O2'    8  avg=   -87.808297  +-    88.272359 
+#define gi_mof_Al-O1-O1-O        4         0.0         0.0       0 ; 'Al-O1-O1-O '    9  avg=     5.135844  +-   130.229146 
+#define gi_mof_Al-O1-O1-O2       4         0.0         0.0       0 ; 'Al-O1-O1-O2'   10  avg=     5.133012  +-    40.177829 
+#define gi_mof_Al-O1-O2-O        4         0.0         0.0       0 ; 'Al-O1-O2-O '   11  avg=    -0.000491  +-    38.977206 
+#define gi_mof_Al-O1-O2-O1       4       180.00       15.000     2 ; 'Al-O1-O2-O1'   12  avg=     0.000006  +-     0.116275 
+#define gi_mof_Al-O1-O2-O2       4         0.0         0.0       0 ; 'Al-O1-O2-O2'   13  avg=    -0.002006  +-    59.147002 
+#define gi_mof_Al-O2-O2-O        4       180.00       15.000     2 ; 'Al-O2-O2-O '   14  avg=    -0.000106  +-     0.429347 
+#define gi_mof_Al-O2-O2-O1       4         0.0         0.0       0 ; 'Al-O2-O2-O1'   15  avg=     0.000075  +-    52.591214 
+#define gi_mof_C1-C1-C2-C2       4         0.0         0.0       0 ; 'C1-C1-C2-C2'   16  avg=     0.000000  +-     0.009405 
+#define gi_mof_C1-C2-C2-C1       4       180.00        4.602     2 ; 'C1-C2-C2-C1'   17  avg=    -0.000012  +-     0.010271 
+#define gi_mof_C2-C1-C3-H2       4       180.00        4.602     2 ; 'C2-C1-C3-H2'   18  avg=     2.721025  +-     0.021557 
+#define gi_mof_C2-C1-H2-C3       4         0.0         0.0       0 ; 'C2-C1-H2-C3'   19  avg=    -3.553844  +-     0.029279 
+#define gi_mof_C2-C3-H2-C1       4         0.0         0.0       0 ; 'C2-C3-H2-C1'   20  avg=     3.515831  +-     0.029651 
+#define gi_mof_C3-C2-C4-C5       4       180.00        4.602     2 ; 'C3-C2-C4-C5'   21  avg=    -1.961600  +-     0.015107 
+#define gi_mof_C3-C2-C5-C4       4         0.0         0.0       0 ; 'C3-C2-C5-C4'   22  avg=     1.892513  +-     0.013399 
+#define gi_mof_C3-C4-C5-C2       4         0.0         0.0       0 ; 'C3-C4-C5-C2'   23  avg=    -1.884838  +-     0.013957 
+#define gi_mof_C4-C3-C3-H4       4       180.00        4.602     2 ; 'C4-C3-C3-H4'   24  avg=     0.000000  +-     0.008839 
+#define gi_mof_C4-C3-H4-C3       4         0.0         0.0       0 ; 'C4-C3-H4-C3'   25  avg=     0.000000  +-     0.011455 
+#define gi_mof_C5-C3-O1-O2       4         0.0         0.0       0 ; 'C5-C3-O1-O2'   26  avg=    -4.256687  +-     0.028754 
+#define gi_mof_C5-C3-O2-O1       4         0.0         0.0       0 ; 'C5-C3-O2-O1'   27  avg=     4.779937  +-     0.032835 
+#define gi_mof_C5-O1-O2-C3       4       180.00        4.602     2 ; 'C5-O1-O2-C3'   28  avg=    -5.799756  +-     0.039447 
+#define gi_mof_O-Al-Al-H         4       180.00       15.000     2 ; 'O -Al-Al-H '   29  avg=     0.001838  +-     0.014414 
+#define gi_mof_O-Al-H-Al         4       180.00       15.000     2 ; 'O -Al-H -Al'   30  avg=     0.000000  +-     0.022356 
+
+; END of atomtypes.itp

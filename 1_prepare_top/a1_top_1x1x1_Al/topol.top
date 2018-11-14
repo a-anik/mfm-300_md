@@ -1,0 +1,24 @@
+;
+; MFM-300_Al topology
+;
+; adapted to GROMACS by A.V.Anikeenko, 2018
+;
+;
+;
+;
+;
+
+[ defaults ]
+; nbfunc      comb-rule      gen-pairs       fudgeLJ    fudgeQQ
+1             2              yes             0.5        0.5
+
+
+#include "atomtypes_MFM-300_Al.itp"
+
+#include "MFM-300_Al_1x1x1_periodic.itp"
+
+[ system ]
+MFM-300_Al 1x1x1 periodic
+
+[ molecules ]
+MOF      1

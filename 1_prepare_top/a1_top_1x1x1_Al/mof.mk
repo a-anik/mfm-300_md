@@ -1,0 +1,2 @@
+MOF=MFM-300_Al
+SUPERCELL=1x1x1_periodic

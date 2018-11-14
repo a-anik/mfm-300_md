@@ -1,0 +1,57 @@
+Remark line goes here
+MASS
+cp 12.010        0.360
+ca 12.010        0.360
+c  12.010        0.616
+ha 1.008         0.135
+o  16.000        0.434
+
+BOND
+cp-cp  351.40   1.485
+ca-cp  450.20   1.406
+ca-ca  461.10   1.398
+ca-ha  345.80   1.086
+c -ca  345.90   1.491
+c -o   637.70   1.218
+
+ANGLE
+ca-cp-cp   64.000     121.110
+ca-ca-cp   66.300     120.690
+cp-ca-ha   48.000     119.860
+ca-cp-ca   66.700     118.380
+ca-ca-ca   66.600     120.020
+c -ca-ca   64.300     120.330
+ca-ca-ha   48.200     119.880
+ca-c -o    68.700     122.600
+o -c -o    77.900     130.250
+
+DIHE
+ca-ca-cp-cp   4   14.500       180.000           2.000
+ha-ca-cp-cp   4   14.500       180.000           2.000
+ca-ca-ca-cp   4   14.500       180.000           2.000
+c -ca-ca-cp   4   14.500       180.000           2.000
+ca-cp-cp-ca   4    4.000       180.000           2.000
+ca-ca-cp-ca   4   14.500       180.000           2.000
+ha-ca-cp-ca   4   14.500       180.000           2.000
+ca-ca-ca-ca   4   14.500       180.000           2.000
+ca-ca-ca-ha   4   14.500       180.000           2.000
+o -c -ca-ca   4    4.000       180.000           2.000
+c -ca-ca-ca   4   14.500       180.000           2.000
+c -ca-ca-ha   4   14.500       180.000           2.000
+
+IMPROPER
+ca-ca-cp-cp         1.1          180.0         2.0          Using the default value
+ca-cp-ca-ha         1.1          180.0         2.0          Using general improper torsional angle  X- X-ca-ha, penalty score=  6.0)
+c -ca-ca-ca         1.1          180.0         2.0          Using the default value
+ca-ca-ca-ha         1.1          180.0         2.0          Using general improper torsional angle  X- X-ca-ha, penalty score=  6.0)
+ca-o -c -o          1.1          180.0         2.0          Using general improper torsional angle  X- o- c- o, penalty score=  3.0)
+
+NONBON
+  cp          1.9080  0.0860
+  ca          1.9080  0.0860
+  c           1.9080  0.0860
+  ha          1.4590  0.0150
+  o           1.6612  0.2100
+
+
+

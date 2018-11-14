@@ -1,0 +1,12 @@
+s/charge@C1 /  0.131400/
+s/charge@C2 / -0.230155/
+s/charge@C3 /  0.048549/
+s/charge@C4 / -0.229283/
+s/charge@C5 /  0.711480/
+s/charge@Ga /  2.215088/
+s/charge@H  /  0.489669/
+s/charge@H2 /  0.141607/
+s/charge@H4 /  0.207565/
+s/charge@O  / -1.324140/
+s/charge@O1 / -0.692062/
+s/charge@O2 / -0.724569/
