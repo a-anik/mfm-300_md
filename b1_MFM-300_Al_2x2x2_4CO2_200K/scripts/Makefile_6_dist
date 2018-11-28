@@ -1,0 +1,14 @@
+.PHONY: clean all
+
+all: hist_dist_MOF.H-CO2.O.xvg
+
+dist_MOF.H-CO2.O.xvg: traj.xtc topol.tpr
+	gmx pairdist -f -s -normpbc -cutoff 1.0 -ref "resname MOF and name H" \
+	    -sel "resname CO2 and name \"O[1-2]\"" -o $@
+
+hist_dist_MOF.H-CO2.O.xvg: dist_MOF.H-CO2.O.xvg
+	../scripts/xvg_column_histogram.py -c 2 -bins 200 -xmin 0.0025 -xmax 1.0025 -f $< -o $@
+
+clean:
+	-@rm -f *.xvg
+	-@rm -f \#*\#

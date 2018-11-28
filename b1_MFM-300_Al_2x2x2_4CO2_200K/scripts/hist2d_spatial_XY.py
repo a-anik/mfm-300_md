@@ -1,0 +1,1 @@
+../../scripts/hist2d_spatial_XY.py

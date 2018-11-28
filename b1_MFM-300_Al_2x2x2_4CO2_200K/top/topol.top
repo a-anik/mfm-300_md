@@ -1,0 +1,27 @@
+;
+; MFM-300_Al topology
+;
+; adapted to GROMACS by A.V.Anikeenko, 2018
+;
+;
+;
+;
+;
+
+[ defaults ]
+; nbfunc      comb-rule      gen-pairs       fudgeLJ    fudgeQQ
+1             2              yes             0.5        0.5
+
+
+#include "atomtypes_MFM-300_Al.itp"
+#include "atomtypes_TraPPE.itp"
+
+#include "MFM-300_Al_2x2x2_periodic.itp"
+#include "co2_TraPPE.itp"
+
+[ system ]
+MFM-300_Al 2x2x2 with 4 CO2
+
+[ molecules ]
+MOF      1
+CO2      4
