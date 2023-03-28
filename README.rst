@@ -17,7 +17,7 @@ Prerequisites for topology generator
 * `pymatgen <http://pymatgen.org/>`_
 * `MDAnalysis <https://www.mdanalysis.org/>`_
 * `networkx <https://networkx.github.io/>`_
-* `PyCifRW <https://pypi.org/project/PyCifRW/>`_
+* `PyCifRW <https://github.com/jamesrhester/pycifrw/>`_
 * `CP2K <https://www.cp2k.org/>`_
 * `AmberTools 18 <http://ambermd.org/AmberTools.php>`_
-* `ACPYPE <https://www.ccpn.ac.uk/v2-software/software/ACPYPE-folder>`_ (optional)
+* `ACPYPE <https://github.com/alanwilter/acpype/>`_ (optional)
