@@ -4,6 +4,9 @@ MFM-300 GROMACS MD files
 
 Files for molecular dynamics simulations of MFM-300(M) (M=Al, Ga, In) metal-organic frameworks with embedded TEMPO nitroxide radical.
 
+.. image:: 0_ref_data/mfm-300_Al_3x3x3.png
+    :align: left
+
 Prerequisites for MD
 --------------------
 * `GROMACS 2016 <http://www.gromacs.org>`_ molecular dynamics package
